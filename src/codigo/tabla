@@ -1,0 +1,259 @@
+
+  private void analizarLexico() throws IOException{
+        int cont = 1;
+        
+        
+        String expr = (String) txtResultado.getText();
+        Lexer lexer = new Lexer(new StringReader(expr));
+        String resultado = "TOKEN\t" + "CATEGORIA\t" + "\tTIPO\t" + "VALOR\n"; 
+        while (true) {
+            Tokens token = lexer.yylex();
+            if (token == null) {
+                txtAnalizarLex.setText(resultado);
+                return;
+            }
+            
+            switch (token) {
+              /* case Linea: 
+                    cont++;
+                    resultado +=  cont + " "   ;
+                    break;*/
+                case Punto:
+                    resultado +=  lexer.lexeme + "\t"+ "  Punto\n" ;
+                    break;                       
+                case Comillas:
+                    resultado +=   lexer.lexeme + "\t" + "  Comillas\n" ;
+                    break;
+                case Cadena:
+                    resultado +=  lexer.lexeme + "\t" + "  Tipo de dato\n" ;
+                    break;
+                case T_dato:
+                    resultado += lexer.lexeme + "\t" + "  Palabra reservada\t" + "N/A\n" ;
+                    break;
+                case If:
+                    resultado +=  lexer.lexeme + "\t" + "  Reservada if\n" ;
+                    break;
+                case Else:
+                    resultado +=  lexer.lexeme + "\t" + "  Reservada else\n" ;
+                    break;
+                case Do:
+                    resultado += lexer.lexeme + "\t" + "  Reservada do\n" ;
+                    break;
+                case While:
+                    resultado +=  lexer.lexeme + "\t" + "  Reservada while\n" ;
+                    break;
+                case For:
+                    resultado +=  lexer.lexeme + "\t" + "  Reservada while\n" ;
+                    break;
+                case Igual:
+                    resultado +=  lexer.lexeme + "\t" + "  Operador igual\t" + "N/A\n" ;
+                    break;
+                case Suma:
+                    resultado +=  lexer.lexeme + "\t" + "  Operador suma\n" ;
+                    break;
+                case Resta:
+                    resultado += lexer.lexeme + "\t" + "  Operador resta\n" ;
+                    break;
+                case Multiplicacion:
+                    resultado += lexer.lexeme + "\t" + "  Operador multiplicacion\n" ;
+                    break;
+                case Division:
+                    resultado += lexer.lexeme + "\t" + "  Operador division\n" ;
+                    break;
+                case Op_logico:
+                    resultado +=  lexer.lexeme + "\t" + "  Operador logico\n" ;
+                    break;
+                case Op_incremento:
+                    resultado +=  lexer.lexeme + "\t" + "  Operador incremento\n" ;
+                    break;
+                case Op_relacional:
+                    resultado += lexer.lexeme + "\t" + "  Operador relacional\n" ;
+                    break;
+                case Op_atribucion:
+                    resultado +=  lexer.lexeme + "\t" + "  Operador atribucion\n" ;
+                    break;
+                case Op_booleano:
+                    resultado +=  lexer.lexeme + "\t" + "  Operador booleano\n" ;
+                    break;
+                case Parentesis_a:
+                    resultado +=  lexer.lexeme + "\t" + "  Parentesis de apertura\n" ;
+                    break;
+                case Parentesis_c:
+                    resultado +=  lexer.lexeme + "\t" + "  Parentesis de cierre\n" ;
+                    break;
+                case Llave_a:
+                    resultado += lexer.lexeme + "\t" + "  Llave de apertura\n" ;
+                    break;
+                case Llave_c:
+                    resultado +=  lexer.lexeme + "\t" + "  Llave de cierre\n" ;
+                    break;
+                case Corchete_a:
+                    resultado +=  lexer.lexeme + "\t" + "  Corchete de apertura\n" ;
+                    break;
+                case Corchete_c:
+                    resultado +=  lexer.lexeme + "\t" + "  Corchete de cierre\n" ;
+                    break;
+                case Main:
+                    resultado +=   lexer.lexeme + "\t" + "  Reservada main\n";
+                    break;
+                case P_coma:
+                    resultado += lexer.lexeme + "\t" + "  Punto y coma\t\t"+ "N/A\n" ;
+                    break;
+                case Identificador:
+                    resultado +=  lexer.lexeme + "\t" + "  Identificador   \n" ;
+                    break;
+                case Variable:
+                    resultado += lexer.lexeme +"\t " + "  Variable"  + "\t\t" + "String\n";
+                    break;  
+
+                case As:
+                    resultado += "  <Palabra Reservada>\t" + lexer.lexeme + "\n";
+                    break;        
+                    
+                case Formula:
+                    resultado += lexer.lexeme + "\t" + "  Variable\t\t" + "String\n";
+                    break;    
+                    
+                case Numero:
+                    resultado += lexer.lexeme + "\t" + "  Numero\t\t" + "N/A\n" ;
+                    break;
+                case ERROR:
+                    resultado += "  Simbolo no definido\n";
+                    break;
+                /*default:
+                    resultado += "  < " + lexer.lexeme + " >\n";
+                    break;*/
+            }
+        }
+    }
+
+**************************************************
+private void analizarLexico() throws IOException{
+        int cont = 1;
+        
+        String expr = (String) txtResultado.getText();
+        Lexer lexer = new Lexer(new StringReader(expr));
+        String resultado = "LINEA " + cont + "\t\tSIMBOLO\n"; 
+        while (true) {
+            Tokens token = lexer.yylex();
+            if (token == null) {
+                txtAnalizarLex.setText(resultado);
+                return;
+            }
+            switch (token) {
+                case Linea:
+                    cont++;
+                    resultado += "LINEA " + cont + "\n";
+                    break;
+                case Punto:
+                    resultado += "  <Punto>\t\t" + lexer.lexeme + "\n";
+                    break;                       
+                case Comillas:
+                    resultado += "  <Comillas>\t\t" + lexer.lexeme + "\n";
+                    break;
+                case Cadena:
+                    resultado += "  <Tipo de dato>\t" + lexer.lexeme + "\n";
+                    break;
+                case T_dato:
+                    resultado += "  <Palabra reservada>\t" + lexer.lexeme + "\n";
+                    break;
+                case If:
+                    resultado += "  <Reservada if>\t" + lexer.lexeme + "\n";
+                    break;
+                case Else:
+                    resultado += "  <Reservada else>\t" + lexer.lexeme + "\n";
+                    break;
+                case Do:
+                    resultado += "  <Reservada do>\t" + lexer.lexeme + "\n";
+                    break;
+                case While:
+                    resultado += "  <Reservada while>\t" + lexer.lexeme + "\n";
+                    break;
+                case For:
+                    resultado += "  <Reservada while>\t" + lexer.lexeme + "\n";
+                    break;
+                case Igual:
+                    resultado += "  <Operador igual>\t" + lexer.lexeme + "\n";
+                    break;
+                case Suma:
+                    resultado += "  <Operador suma>\t" + lexer.lexeme + "\n";
+                    break;
+                case Resta:
+                    resultado += "  <Operador resta>\t" + lexer.lexeme + "\n";
+                    break;
+                case Multiplicacion:
+                    resultado += "  <Operador multiplicacion>\t" + lexer.lexeme + "\n";
+                    break;
+                case Division:
+                    resultado += "  <Operador division>\t" + lexer.lexeme + "\n";
+                    break;
+                case Op_logico:
+                    resultado += "  <Operador logico>\t" + lexer.lexeme + "\n";
+                    break;
+                case Op_incremento:
+                    resultado += "  <Operador incremento>\t" + lexer.lexeme + "\n";
+                    break;
+                case Op_relacional:
+                    resultado += "  <Operador relacional>\t" + lexer.lexeme + "\n";
+                    break;
+                case Op_atribucion:
+                    resultado += "  <Operador atribucion>\t" + lexer.lexeme + "\n";
+                    break;
+                case Op_booleano:
+                    resultado += "  <Operador booleano>\t" + lexer.lexeme + "\n";
+                    break;
+                case Parentesis_a:
+                    resultado += "  <Parentesis de apertura>\t" + lexer.lexeme + "\n";
+                    break;
+                case Parentesis_c:
+                    resultado += "  <Parentesis de cierre>\t" + lexer.lexeme + "\n";
+                    break;
+                case Llave_a:
+                    resultado += "  <Llave de apertura>\t" + lexer.lexeme + "\n";
+                    break;
+                case Llave_c:
+                    resultado += "  <Llave de cierre>\t" + lexer.lexeme + "\n";
+                    break;
+                case Corchete_a:
+                    resultado += "  <Corchete de apertura>\t" + lexer.lexeme + "\n";
+                    break;
+                case Corchete_c:
+                    resultado += "  <Corchete de cierre>\t" + lexer.lexeme + "\n";
+                    break;
+                case Main:
+                    resultado += "  <Reservada main>\t" + lexer.lexeme + "\n";
+                    break;
+                case P_coma:
+                    resultado += "  <Punto y coma>\t" + lexer.lexeme + "\n";
+                    break;
+                case Identificador:
+                    resultado += "  <Identificador>\t\t" + lexer.lexeme + "\n";
+                    break;
+                case Variable:
+                    resultado += "  <Variable>\t\t" + lexer.lexeme + "\n";
+                    break;  
+                    
+                case As:
+                    resultado += "  <Palabra Reservada>\t" + lexer.lexeme + "\n";
+                    break;      
+                    
+                case Formula:
+                    resultado += "  <Variable>\t\t" + lexer.lexeme + "\n";
+                    break;    
+                    
+                case Numero:
+                    resultado += "  <Numero>\t\t" + lexer.lexeme + "\n";
+                    break;
+                case ERROR:
+                    resultado += "  <Simbolo no definido>\n";
+                    break;
+                default:
+                    resultado += "  < " + lexer.lexeme + " >\n";
+                    break;
+            }
+        }
+    }
+
+***************************************
+/* Tipo de dato Int (Para el main) */
+( "Integer" ) {return new Symbol(sym.Int, yychar, yyline, yytext());}
